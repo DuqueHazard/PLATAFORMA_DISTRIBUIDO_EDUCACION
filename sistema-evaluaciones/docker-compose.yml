@@ -1,0 +1,63 @@
+services:
+  quiz-service:
+    build: ./quiz-service
+    container_name: quiz-service
+    ports:
+      - "5000:5000"
+    networks:
+      - evaluacion-net
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+    depends_on:
+      - mongo
+
+  feedback-service:
+    build: ./feedback-service
+    container_name: feedback-service
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+    networks:
+      - evaluacion-net
+  forum-service:
+    build: ./forum-service
+    container_name: forum-service
+    ports:
+      - "5002:5002"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+    networks:
+      - evaluacion-net
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "3003:80"  # 3003 local → 80 en el contenedor nginx
+    networks:
+      - evaluacion-net
+    depends_on:
+      - quiz-service
+      - forum-service
+      - feedback-service
+
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db     # Aquí persistes los datos
+    networks:
+      - evaluacion-net
+
+volumes:
+  mongo_data:
+
+networks:
+  evaluacion-net:
+    driver: bridge
