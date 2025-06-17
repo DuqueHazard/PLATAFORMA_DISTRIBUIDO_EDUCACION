@@ -36,7 +36,7 @@ proyecto/
 
 ## 🔧 Instalación
 
-1### 1. Clonar el repositorio
+### Clonar el repositorio
 ``` bash
 git clone https://github.com/tu-usuario/nombre-repo.git
 cd nombre-repo
