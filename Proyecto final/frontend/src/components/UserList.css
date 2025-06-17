@@ -1,0 +1,112 @@
+/* src/components/UserList.css */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+body {
+  background-color: #0d0d0d;
+  color: #00ff88;
+  font-family: 'Share Tech Mono', monospace;
+  margin: 0;
+  padding: 0;
+}
+
+.user-list-container {
+  border: 3px solid #00ff88;
+  box-shadow: 0 0 20px #00ff88aa, inset 0 0 10px #00ff8844;
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 5rem auto;
+  background-color: #000;
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.title {
+  text-align: center;
+  font-size: 28px;
+  text-shadow: 0 0 10px #00ff88;
+  margin-bottom: 2rem;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  background-color: #0d0d0d;
+  border: 1px solid #00ff88;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 14px;
+  border: 1px solid #00ff8855;
+  color: #00ff88;
+}
+
+.custom-table th {
+  background-color: #0a0a0a;
+  font-weight: bold;
+  text-shadow: 0 0 5px #00ff88;
+}
+
+.custom-table tr:hover {
+  background-color: #001f1a;
+}
+
+.btn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  text-shadow: 0 0 5px #00ff88;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.edit-btn {
+  background-color: transparent;
+  border: 2px solid #00ff88;
+  color: #00ff88;
+}
+
+.edit-btn:hover {
+  background-color: #00ff88;
+  color: #000;
+  box-shadow: 0 0 12px #00ff88;
+}
+
+.delete-btn {
+  background-color: transparent;
+  border: 2px solid #ff3b3b;
+  color: #ff3b3b;
+}
+
+.delete-btn:hover {
+  background-color: #ff3b3b;
+  color: #000;
+  box-shadow: 0 0 12px #ff3b3b;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px #00ff88aa, inset 0 0 10px #00ff8844;
+  }
+  50% {
+    box-shadow: 0 0 35px #00ff88, inset 0 0 15px #00ff88;
+  }
+}
+.create-btn {
+  color: #0f0;
+  border: 1px solid #0f0;
+  padding: 6px 12px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: inline-block;
+  transition: background 0.3s;
+}
+
+.create-btn:hover {
+  background-color: #0f0;
+  color: #000;
+}

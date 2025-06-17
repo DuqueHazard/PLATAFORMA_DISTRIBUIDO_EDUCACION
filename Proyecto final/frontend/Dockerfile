@@ -1,0 +1,18 @@
+# Etapa 1: Construcción de la app
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Etapa 2: Servidor de producción usando 'serve'
+FROM node:20-alpine
+
+WORKDIR /app
+RUN npm install -g serve
+COPY --from=builder /app/build ./build
+
+EXPOSE 3000
+CMD ["serve", "-s", "build", "-l", "3000"]

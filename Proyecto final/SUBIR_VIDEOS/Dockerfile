@@ -1,0 +1,14 @@
+# Dockerfile para microservicio de subida de videos simple
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 4003
+
+CMD ["node", "src/index.js"]

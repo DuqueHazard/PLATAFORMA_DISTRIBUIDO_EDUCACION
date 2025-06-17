@@ -1,0 +1,19 @@
+.perfil-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+}
+
+.perfil-container input,
+.perfil-container button {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-top: 10px;
+}

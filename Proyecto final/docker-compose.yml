@@ -1,0 +1,108 @@
+version: "3.9"
+
+services:
+  postgres:
+    build: ./db/postgres
+    ports:
+      - "5432:5432"
+
+  mongo:
+    build: ./db/mongo
+    ports:
+      - "27017:27017"
+
+  autenticacion:
+    build: ./autenticacion
+    ports:
+      - "3000:3000"
+    env_file:
+    - ./autenticacion/.env
+
+  perfiles:
+    build: ./perfiles
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./perfiles/.env
+  
+
+  estadisticas:
+    build: ./estadisticas
+    ports:
+      - "8000:8000"
+    
+  usuarios:
+    build: ./usuarios
+    ports:
+      - "3003:3002"
+    env_file:
+      - ./usuarios/.env
+    
+  videos:
+    build:
+      context: ./VIDEOS
+    ports:
+      - "4000:4000"
+    environment:
+      - MONGO_URL=mongodb://mongo:27017
+    depends_on:
+      - mongo
+  
+  subir_videos:
+    build:
+      context: ./SUBIR_VIDEOS
+    ports:
+      - "4003:4003"
+    env_file:
+      - ./SUBIR_VIDEOS/.env
+    depends_on:
+      - mongo
+#QUiz service
+  quiz-service:
+    build: ./quiz-service
+    container_name: quiz-servicee
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+      - postgres
+    env_file:
+      - ./quiz-service/.env
+
+  feedback-service:
+    build: ./feedback-service
+    container_name: feedback-servicee
+    ports:
+      - "5001:5001"
+    environment:
+      - ./feedback-service/.env
+    depends_on:
+      - mongo
+  
+  forum-service:
+    build: ./forum-service
+    container_name: forum-servicee
+    ports:
+      - "5002:5002"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+    networks:
+      - evaluacion-net
+
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3000"
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+      - ./frontend/package.json:/app/package.json
+      - ./frontend/package-lock.json:/app/package-lock.json
+networks:
+  evaluacion-net:
+
